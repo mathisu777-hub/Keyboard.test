@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KEYTEST PRO 2.0 | VAXOR</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root{
+ --bg:#080b0c;
+ --panel:#111817;
+ --panel2:#17211e;
+ --green:#b6ff52;
+ --text:#f3f7f2;
+ --muted:#82918a;
+ --glow:#b6ff52;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+ background:var(--bg);
+ color:var(--text);
+ font-family:Inter,sans-serif;
+ min-height:100vh;
+ overflow-x:hidden;
+}
+
+body:before{
+ content:"";
+ position:fixed;
+ width:600px;height:600px;
+ background:#aaff2510;
+ filter:blur(130px);
+ top:-250px;left:30%;
+ pointer-events:none;
+ z-index:-1;
+}
+
+header{
+ height:76px;
+ padding:0 5%;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ border-bottom:1px solid #ffffff13;
+}
+
+.logo{
+ font-size:23px;
+ font-weight:900;
+ letter-spacing:-1px;
+}
+
+.logo span{color:var(--green)}
+
+.header-status{
+ color:var(--muted);
+ font-size:10px;
+ letter-spacing:2px;
+}
+
+.screen{
+ display:none;
+ max-width:1250px;
+ padding:55px 4%;
+ margin:auto;
+}
+
+.screen.active{display:block}
+
+.tag{
+ display:inline-block;
+ color:var(--green);
+ border:1px solid #b6ff5240;
+ padding:8px 14px;
+ border-radius:30px;
+ font-size:9px;
+ font-weight:900;
+ letter-spacing:2px;
+ margin-bottom:18px;
+}
+
+.intro{text-align:center;margin-bottom:38px}
+
+h1{
+ font-size:clamp(38px,7vw,68px);
+ letter-spacing:-4px;
+ font-weight:900;
+}
+
+h1 span{color:var(--green)}
+
+.subtitle{
+ color:var(--muted);
+ font-size:13px;
+ line-height:1.8;
+ margin-top:13px;
+}
+
+/* SPONSOR */
+
+.sponsor{
+ max-width:850px;
+ min-height:155px;
+ margin:0 auto 42px;
+ padding:25px 32px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:20px;
+ position:relative;
+ overflow:hidden;
+ border:1px solid #b6ff5240;
+ border-radius:16px;
+ background:
+ radial-gradient(ellipse at 85% 50%,#b6ff5225,transparent 60%),
+ linear-gradient(110deg,#080d0b,#111a13);
+}
+
+.sponsor:before{
+ content:"";
+ position:absolute;
+ top:0;left:0;
+ width:4px;height:100%;
+ background:var(--green);
+ box-shadow:0 0 20px var(--green);
+}
+
+.sponsor-label{
+ font-size:9px;
+ color:var(--green);
+ letter-spacing:4px;
+ font-weight:900;
+ margin-bottom:12px;
+}
+
+.sponsor h3{font-size:23px;font-weight:900}
+
+.sponsor p{
+ font-size:11px;
+ color:var(--muted);
+ margin-top:7px;
+}
+
+.sponsor-logo{
+ color:var(--green);
+ font-size:clamp(30px,5vw,48px);
+ font-weight:900;
+ font-style:italic;
+ letter-spacing:-3px;
+ text-shadow:0 0 25px #b6ff5270;
+}
+
+.sponsor-btn{
+ display:inline-block;
+ margin-top:13px;
+ padding:10px 17px;
+ border-radius:5px;
+ background:var(--green);
+ color:#10150b;
+ text-decoration:none;
+ font-size:10px;
+ font-weight:900;
+}
+
+/* HOME */
+
+.choice-title{
+ text-align:center;
+ font-size:12px;
+ color:var(--muted);
+ margin-bottom:20px;
+}
+
+.choices{
+ display:flex;
+ justify-content:center;
+ gap:18px;
+ flex-wrap:wrap;
+}
+
+.choice{
+ width:245px;
+ padding:27px;
+ border-radius:15px;
+ border:1px solid #ffffff17;
+ background:var(--panel);
+ cursor:pointer;
+ transition:.25s;
+}
+
+.choice:hover{
+ transform:translateY(-5px);
+ border-color:var(--green);
+ box-shadow:0 0 30px #b6ff5215;
+}
+
+.flag{font-size:30px;margin-bottom:18px}
+.choice h2{font-size:25px}
+.choice p{font-size:11px;color:var(--muted);margin-top:8px}
+.arrow{color:var(--green);font-size:11px;font-weight:900;margin-top:23px}
+
+/* DASHBOARD */
+
+.dashboard-title{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ flex-wrap:wrap;
+ gap:15px;
+ margin-bottom:20px;
+}
+
+.dashboard-title h2{font-size:23px}
+.dashboard-title h2 span{color:var(--green)}
+
+.live{
+ display:flex;
+ align-items:center;
+ gap:7px;
+ color:#b6ff52;
+ font-size:10px;
+ font-weight:900;
+ letter-spacing:2px;
+}
+
+.live-dot{
+ width:8px;height:8px;
+ background:var(--green);
+ border-radius:50%;
+ box-shadow:0 0 12px var(--green);
+ animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+ 50%{opacity:.3;transform:scale(.75)}
+}
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:12px;
+ margin-bottom:17px;
+}
+
+.stat{
+ padding:17px;
+ background:var(--panel);
+ border:1px solid #ffffff12;
+ border-radius:11px;
+ min-width:0;
+}
+
+.stat small{
+ display:block;
+ font-size:9px;
+ color:var(--muted);
+ letter-spacing:1px;
+ margin-bottom:10px;
+}
+
+.stat strong{
+ font-size:24px;
+ color:var(--green);
+}
+
+.progress{
+ height:5px;
+ background:#202a27;
+ border-radius:20px;
+ overflow:hidden;
+ margin-bottom:22px;
+}
+
+.progress-bar{
+ height:100%;
+ width:0%;
+ background:var(--green);
+ box-shadow:0 0 12px var(--green);
+ transition:.3s;
+}
+
+/* MONITOR */
+
+.monitor{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+ margin-bottom:18px;
+}
+
+.monitor-card{
+ background:var(--panel);
+ border:1px solid #ffffff13;
+ padding:18px;
+ border-radius:12px;
+ min-height:120px;
+}
+
+.monitor-label{
+ color:var(--muted);
+ font-size:9px;
+ letter-spacing:2px;
+ font-weight:800;
+ margin-bottom:15px;
+}
+
+.last-key{
+ font-size:35px;
+ font-weight:900;
+ color:var(--green);
+ text-shadow:0 0 20px #b6ff5250;
+}
+
+.history{
+ display:flex;
+ flex-wrap:wrap;
+ gap:7px;
+}
+
+.history-key{
+ background:#26322d;
+ color:var(--green);
+ padding:8px 10px;
+ border-radius:5px;
+ font-size:11px;
+ font-weight:800;
+}
+
+/* KEYBOARD */
+
+.keyboard-container{
+ background:linear-gradient(145deg,#121b19,#0a100f);
+ border:1px solid #ffffff17;
+ border-radius:17px;
+ padding:23px 14px;
+ overflow-x:auto;
+ box-shadow:0 20px 60px #0008;
+}
+
+.keyboard{
+ min-width:850px;
+ max-width:1050px;
+ margin:auto;
+}
+
+.key-row{
+ display:flex;
+ justify-content:center;
+ gap:5px;
+ margin-bottom:6px;
+}
+
+.key{
+ flex:1;
+ min-width:0;
+ height:52px;
+ border:1px solid #ffffff13;
+ border-bottom:4px solid #080c0b;
+ border-radius:7px;
+ background:linear-gradient(145deg,#28332f,#151d1a);
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ position:relative;
+ color:#d3ddd5;
+ font-size:12px;
+ font-weight:800;
+ transition:.12s;
+ user-select:none;
+}
+
+.key.w125{flex:1.25}
+.key.w15{flex:1.5}
+.key.w175{flex:1.75}
+.key.w2{flex:2}
+.key.w225{flex:2.25}
+.key.w275{flex:2.75}
+.key.space{flex:6}
+
+.key.active{
+ background:var(--glow);
+ color:#10160b;
+ border-color:var(--glow);
+ box-shadow:0 0 12px var(--glow),0 0 30px var(--glow);
+ transform:translateY(2px);
+ border-bottom-width:2px;
+}
+
+.key.tested:not(.active){
+ color:var(--glow);
+ border-color:var(--glow);
+}
+
+.key small{
+ position:absolute;
+ top:4px;left:5px;
+ font-size:7px;
+ color:#89968e;
+}
+
+.key.active small{color:#26351a}
+
+/* RGB MODE */
+
+body.rgb-mode .key.tested:not(.active){
+ animation:rgbGlow 3s linear infinite;
+}
+
+@keyframes rgbGlow{
+ 0%{color:#b6ff52;border-color:#b6ff52}
+ 25%{color:#52edff;border-color:#52edff}
+ 50%{color:#bd72ff;border-color:#bd72ff}
+ 75%{color:#ff72b6;border-color:#ff72b6}
+ 100%{color:#b6ff52;border-color:#b6ff52}
+}
+
+/* CONTROLS */
+
+.controls{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:10px;
+ margin:20px 0;
+}
+
+.btn{
+ border:1px solid #ffffff20;
+ background:var(--panel);
+ color:white;
+ border-radius:7px;
+ padding:13px 18px;
+ font-size:10px;
+ font-weight:900;
+ cursor:pointer;
+ transition:.2s;
+}
+
+.btn:hover{border-color:var(--green)}
+
+.btn.primary{
+ background:var(--green);
+ color:#10150b;
+ border-color:var(--green);
+}
+
+.btn.primary:hover{box-shadow:0 0 20px #b6ff5260}
+
+.btn.selected{
+ border-color:var(--green);
+ color:var(--green);
+}
+
+.section-label{
+ font-size:10px;
+ color:var(--muted);
+ letter-spacing:2px;
+ font-weight:900;
+ margin-bottom:12px;
+}
+
+.color-dot{
+ width:13px;height:13px;
+ border-radius:50%;
+ display:inline-block;
+ margin-right:6px;
+ vertical-align:middle;
+}
+
+.bottom-panel{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:15px;
+ margin-top:22px;
+}
+
+.panel{
+ background:var(--panel);
+ border:1px solid #ffffff13;
+ padding:17px;
+ border-radius:12px;
+}
+
+.panel p{
+ font-size:11px;
+ color:var(--muted);
+ line-height:1.7;
+}
+
+/* RESULTS */
+
+.score-circle{
+ width:155px;height:155px;
+ margin:25px auto;
+ border-radius:50%;
+ border:6px solid var(--green);
+ box-shadow:0 0 35px #b6ff5230,inset 0 0 25px #b6ff5210;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+}
+
+.score-circle strong{
+ font-size:44px;
+ color:var(--green);
+}
+
+.score-circle small{
+ font-size:9px;
+ color:var(--muted);
+ letter-spacing:2px;
+}
+
+.result-text{
+ text-align:center;
+ color:var(--muted);
+ font-size:12px;
+ line-height:1.8;
+ margin-bottom:25px;
+}
+
+footer{
+ text-align:center;
+ padding:30px;
+ border-top:1px solid #ffffff10;
+ color:#59665f;
+ font-size:9px;
+ letter-spacing:2px;
+ margin-top:45px;
+}
+
+@media(max-width:750px){
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .monitor{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:500px){
+ header{padding:0 4%}
+ .header-status{font-size:8px}
+ .screen{padding:40px 4%}
+ .sponsor{padding:22px;flex-wrap:wrap}
+ .choice{width:100%}
+ .monitor{grid-template-columns:1fr}
+ .bottom-panel{grid-template-columns:1fr}
+ .stat strong{font-size:21px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">KEY<span>TEST</span> PRO</div>
+ <div class="header-status">VAXOR GAMING LAB / 02.0</div>
+</header>
+
+<!-- HOME -->
+
+<section class="screen active" id="home">
+
+ <div class="intro">
+  <div class="tag">VAXOR GAMING TECHNOLOGY</div>
+  <h1>TEST YOUR <span>KEYBOARD.</span></h1>
+  <p class="subtitle">
+   Your keyboard. Your performance. Your test.<br>
+   Comprueba todas tus teclas en tiempo real.
+  </p>
+ </div>
+
+ <div class="sponsor">
+  <div>
+   <div class="sponsor-label">OFFICIAL GAMING PARTNER</div>
+   <h3>BUILT FOR GAMERS.</h3>
+   <p>Discover the next generation of gaming gear.</p>
+   <a class="sponsor-btn" href="https://example.com" target="_blank">
+    VISIT VAXOR ↗
+   </a>
+  </div>
+  <div class="sponsor-logo">VAXOR®</div>
+ </div>
+
+ <div class="choice-title">SELECT YOUR KEYBOARD LAYOUT</div>
+
+ <div class="choices">
+  <div class="choice" onclick="startTest('AZERTY')">
+   <div class="flag">🇫🇷</div>
+   <h2>AZERTY</h2>
+   <p>French keyboard layout</p>
+   <div class="arrow">START TEST →</div>
+  </div>
+
+  <div class="choice" onclick="startTest('QWERTY')">
+   <div class="flag">🇬🇧</div>
+   <h2>QWERTY</h2>
+   <p>International keyboard layout</p>
+   <div class="arrow">START TEST →</div>
+  </div>
+ </div>
+
+</section>
+
+<!-- TEST -->
+
+<section class="screen" id="test">
+
+ <div class="dashboard-title">
+  <h2>KEYBOARD <span id="layoutName">AZERTY</span></h2>
+  <div class="live"><span class="live-dot"></span> LIVE MONITOR</div>
+ </div>
+
+ <div class="stats">
+  <div class="stat">
+   <small>TESTED KEYS</small>
+   <strong id="testedCount">0</strong>
+  </div>
+  <div class="stat">
+   <small>PROGRESS</small>
+   <strong id="percentage">0%</strong>
+  </div>
+  <div class="stat">
+   <small>KEY PRESSES</small>
+   <strong id="pressCount">0</strong>
+  </div>
+  <div class="stat">
+   <small>TEST SCORE</small>
+   <strong id="score">0/100</strong>
+  </div>
+ </div>
+
+ <div class="progress">
+  <div class="progress-bar" id="progressBar"></div>
+ </div>
+
+ <!-- LIVE MONITOR -->
+
+ <div class="monitor">
+
+  <div class="monitor-card">
+   <div class="monitor-label">LAST KEY DETECTED</div>
+   <div class="last-key" id="lastKey">---</div>
+  </div>
+
+  <div class="monitor-card">
+   <div class="monitor-label">RECENT KEY HISTORY</div>
+   <div class="history" id="history">
+    <span style="color:#82918a;font-size:11px">Waiting for input...</span>
+   </div>
+  </div>
+
+ </div>
+
+ <!-- KEYBOARD -->
+
+ <div class="keyboard-container">
+  <div class="keyboard" id="keyboard"></div>
+ </div>
+
+ <div class="controls">
+  <button class="btn" onclick="resetTest()">↻ RESET TEST</button>
+  <button class="btn" onclick="backHome()">← HOME</button>
+  <button class="btn primary" onclick="showResults()">VIEW RESULTS →</button>
+ </div>
+
+ <!-- RGB CONTROL -->
+
+ <div class="bottom-panel">
+
+  <div class="panel">
+   <div class="section-label">RGB LIGHTING</div>
+
+   <div class="controls" style="justify-content:flex-start;margin:0">
+    <button class="btn" id="rgbBtn" onclick="toggleRGB()">🌈 RGB OFF</button>
+    <button class="btn selected" onclick="setColor('#b6ff52',this)">
+     <span class="color-dot" style="background:#b6ff52"></span>GREEN
+    </button>
+    <button class="btn" onclick="setColor('#52edff',this)">
+     <span class="color-dot" style="background:#52edff"></span>BLUE
+    </button>
+    <button class="btn" onclick="setColor('#bd72ff',this)">
+     <span class="color-dot" style="background:#bd72ff"></span>PURPLE
+    </button>
+    <button class="btn" onclick="setColor('#ff72b6',this)">
+     <span class="color-dot" style="background:#ff72b6"></span>PINK
+    </button>
+   </div>
+  </div>
+
+  <div class="panel">
+   <div class="section-label">VAXOR PERFORMANCE MODE</div>
+   <p>
+    Activa la experiencia gaming completa:
+    iluminación RGB, efectos neón y una interfaz
+    diseñada para los gamers.
+   </p>
+   <button class="btn primary" style="margin-top:12px" id="performanceBtn" onclick="togglePerformance()">
+    ⚡ ACTIVATE PERFORMANCE
+   </button>
+  </div>
+
+ </div>
+
+ <p class="subtitle" style="text-align:center;margin-top:22px">
+  Press any physical key to illuminate it.
+ </p>
+
+</section>
+
+<!-- RESULTS -->
+
+<section class="screen" id="results">
+
+ <div class="intro">
+  <div class="tag">TEST COMPLETED</div>
+  <h1>YOUR <span>RESULTS.</span></h1>
+  <p class="subtitle">KEYTEST PRO PERFORMANCE REPORT</p>
+ </div>
+
+ <div class="score-circle">
+  <strong id="finalScore">0</strong>
+  <small>OUT OF 100</small>
+ </div>
+
+ <div class="result-text" id="resultMessage"></div>
+
+ <div class="stats">
+  <div class="stat">
+   <small>TESTED KEYS</small>
+   <strong id="finalKeys">0</strong>
+  </div>
+  <div class="stat">
+   <small>KEY PRESSES</small>
+   <strong id="finalPresses">0</strong>
+  </div>
+  <div class="stat">
+   <small>LAYOUT</small>
+   <strong id="finalLayout">AZERTY</strong>
+  </div>
+  <div class="stat">
+   <small>COMPLETION</small>
+   <strong id="finalPercent">0%</strong>
+  </div>
+ </div>
+
+ <div class="controls">
+  <button class="btn primary" onclick="resetTest();showScreen('test')">
+   REPEAT TEST ↻
+  </button>
+  <button class="btn" onclick="backHome()">HOME</button>
+ </div>
+
+</section>
+
+<footer>
+ KEYTEST PRO 2.0 · POWERED BY VAXOR · 2026
+</footer>
+
+<script>
+
+/* KEYBOARD LAYOUTS
+   Physical codes use KeyboardEvent.code.
+*/
+
+const layouts={
+
+AZERTY:[
+[
+['²','Backquote'],['1','Digit1'],['2','Digit2'],
+['3','Digit3'],['4','Digit4'],['5','Digit5'],
+['6','Digit6'],['7','Digit7'],['8','Digit8'],
+['9','Digit9'],['0','Digit0'],['°','Minus'],
+['+','Equal'],['BACKSPACE','Backspace','w2']
+],
+[
+['TAB','Tab','w15'],['A','KeyQ'],['Z','KeyW'],
+['E','KeyE'],['R','KeyR'],['T','KeyT'],
+['Y','KeyY'],['U','KeyU'],['I','KeyI'],
+['O','KeyO'],['P','KeyP'],['^','BracketLeft'],
+['$','BracketRight'],['ENTER','Enter','w2']
+],
+[
+['CAPS','CapsLock','w175'],['Q','KeyA'],['S','KeyS'],
+['D','KeyD'],['F','KeyF'],['G','KeyG'],
+['H','KeyH'],['J','KeyJ'],['K','KeyK'],
+['L','KeyL'],['M','Semicolon'],['ù','Quote'],
+['*','Backslash']
+],
+[
+['SHIFT','ShiftLeft','w225'],['<','IntlBackslash'],
+['W','KeyZ'],['X','KeyX'],['C','KeyC'],
+['V','KeyV'],['B','KeyB'],['N','KeyN'],
+[',','Comma'],[';','Period'],[':','Slash'],
+['SHIFT','ShiftRight','w275']
+],
+[
+['CTRL','ControlLeft','w15'],['WIN','MetaLeft'],
+['ALT','AltLeft'],['SPACE','Space','space'],
+['ALT GR','AltRight'],['MENU','ContextMenu'],
+['CTRL','ControlRight','w15']
+]
+],
+
+QWERTY:[
+[
+['`','Backquote'],['1','Digit1'],['2','Digit2'],
+['3','Digit3'],['4','Digit4'],['5','Digit5'],
+['6','Digit6'],['7','Digit7'],['8','Digit8'],
+['9','Digit9'],['0','Digit0'],['-','Minus'],
+['=','Equal'],['BACKSPACE','Backspace','w2']
+],
+[
+['TAB','Tab','w15'],['Q','KeyQ'],['W','KeyW'],
+['E','KeyE'],['R','KeyR'],['T','KeyT'],
+['Y','KeyY'],['U','KeyU'],['I','KeyI'],
+['O','KeyO'],['P','KeyP'],['[','BracketLeft'],
+[']','BracketRight'],['\\','Backslash']
+],
+[
+['CAPS','CapsLock','w175'],['A','KeyA'],['S','KeyS'],
+['D','KeyD'],['F','KeyF'],['G','KeyG'],
+['H','KeyH'],['J','KeyJ'],['K','KeyK'],
+['L','KeyL'],[';','Semicolon'],["'",'Quote'],
+['ENTER','Enter','w2']
+],
+[
+['SHIFT','ShiftLeft','w225'],['Z','KeyZ'],['X','KeyX'],
+['C','KeyC'],['V','KeyV'],['B','KeyB'],
+['N','KeyN'],['M','KeyM'],[',','Comma'],
+['.','Period'],['/','Slash'],['SHIFT','ShiftRight','w275']
+],
+[
+['CTRL','ControlLeft','w15'],['WIN','MetaLeft'],
+['ALT','AltLeft'],['SPACE','Space','space'],
+['ALT GR','AltRight'],['MENU','ContextMenu'],
+['CTRL','ControlRight','w15']
+]
+]
+
+};
+
+/* STATE */
+
+let currentLayout='AZERTY';
+let tested=new Set();
+let pressed=new Set();
+let pressCount=0;
+let history=[];
+let rgb=false;
+let performance=false;
+
+const totalKeys=()=>layouts[currentLayout].flat().length;
+
+/* SCREEN */
+
+function showScreen(id){
+ document.querySelectorAll('.screen').forEach(s=>{
+  s.classList.remove('active');
+ });
+ document.getElementById(id).classList.add('active');
+}
+
+/* START */
+
+function startTest(layout){
+ currentLayout=layout;
+ tested.clear();
+ pressed.clear();
+ pressCount=0;
+ history=[];
+
+ document.getElementById('layoutName').textContent=layout;
+
+ buildKeyboard();
+ updateDashboard();
+ updateHistory();
+ showScreen('test');
+}
+
+/* BUILD KEYBOARD */
+
+function buildKeyboard(){
+ const keyboard=document.getElementById('keyboard');
+ keyboard.innerHTML='';
+
+ layouts[currentLayout].forEach(row=>{
+  const rowElement=document.createElement('div');
+  rowElement.className='key-row';
+
+  row.forEach(([label,code,size])=>{
+   const key=document.createElement('div');
+   key.className='key '+(size||'');
+   key.textContent=label;
+   key.dataset.code=code;
+
+   rowElement.appendChild(key);
+  });
+
+  keyboard.appendChild(rowElement);
+ });
+
+}
+
+/* KEY EVENTS */
+
+function pressKey(code){
+
+ if(!code)return;
+
+ const key=[...document.querySelectorAll('.key')]
+  .find(k=>k.dataset.code===code);
+
+ if(!key)return;
+
+ key.classList.add('active','tested');
+
+ if(!tested.has(code)){
+  tested.add(code);
+ }
+
+ pressed.add(code);
+ pressCount++;
+
+ const label=key.textContent;
+
+ document.getElementById('lastKey').textContent=label;
+
+ history.unshift(label);
+ history=history.slice(0,10);
+
+ updateHistory();
+ updateDashboard();
+
+}
+
+function releaseKey(code){
+
+ const key=[...document.querySelectorAll('.key')]
+  .find(k=>k.dataset.code===code);
+
+ if(key)key.classList.remove('active');
+
+ pressed.delete(code);
+
+}
+
+/* PHYSICAL INPUT */
+
+document.addEventListener('keydown',event=>{
+
+ if(!document.getElementById('test').classList.contains('active'))return;
+
+ if(event.repeat)return;
+
+ event.preventDefault();
+ pressKey(event.code);
+
+});
+
+document.addEventListener('keyup',event=>{
+ releaseKey(event.code);
+});
+
+window.addEventListener('blur',()=>{
+ pressed.forEach(code=>releaseKey(code));
+});
+
+/* DASHBOARD */
+
+function updateDashboard(){
+
+ const total=totalKeys();
+ const count=tested.size;
+ const percent=Math.round(count/total*100);
+
+ document.getElementById('testedCount').textContent=count;
+ document.getElementById('percentage').textContent=percent+'%';
+ document.getElementById('pressCount').textContent=pressCount;
+ document.getElementById('score').textContent=percent+'/100';
+
+ document.getElementById('progressBar').style.width=percent+'%';
+
+}
+
+function updateHistory(){
+
+ const box=document.getElementById('history');
+ box.innerHTML='';
+
+ if(history.length===0){
+  box.innerHTML='<span style="color:#82918a;font-size:11px">Waiting for input...</span>';
+  return;
+ }
+
+ history.forEach(label=>{
+  const item=document.createElement('span');
+  item.className='history-key';
+  item.textContent=label;
+  box.appendChild(item);
+ });
+
+}
+
+/* RGB */
+
+function toggleRGB(){
+
+ rgb=!rgb;
+ document.body.classList.toggle('rgb-mode',rgb);
+
+ document.getElementById('rgbBtn').textContent=
+  rgb?'🌈 RGB ON':'🌈 RGB OFF';
+
+}
+
+function setColor(color,button){
+
+ document.documentElement.style.setProperty('--glow',color);
+
+ document.querySelectorAll('.bottom-panel .btn').forEach(btn=>{
+  if(btn.textContent.includes('GREEN')||
+     btn.textContent.includes('BLUE')||
+     btn.textContent.includes('PURPLE')||
+     btn.textContent.includes('PINK')){
+   btn.classList.remove('selected');
+  }
+ });
+
+ button.classList.add('selected');
+
+}
+
+/* PERFORMANCE MODE */
+
+function togglePerformance(){
+
+ performance=!performance;
+
+ if(performance){
+  rgb=true;
+  document.body.classList.add('rgb-mode');
+  document.documentElement.style.setProperty('--glow','#b6ff52');
+  document.getElementById('rgbBtn').textContent='🌈 RGB ON';
+  document.getElementById('performanceBtn').textContent='⚡ DEACTIVATE PERFORMANCE';
+  document.getElementById('performanceBtn').classList.remove('primary');
+ }else{
+  rgb=false;
+  document.body.classList.remove('rgb-mode');
+  document.getElementById('rgbBtn').textContent='🌈 RGB OFF';
+  document.getElementById('performanceBtn').textContent='⚡ ACTIVATE PERFORMANCE';
+  document.getElementById('performanceBtn').classList.add('primary');
+ }
+
+}
+
+/* RESET */
+
+function resetTest(){
+
+ tested.clear();
+ pressed.clear();
+ history=[];
+ pressCount=0;
+
+ document.querySelectorAll('.key').forEach(key=>{
+  key.classList.remove('active','tested');
+ });
+
+ document.getElementById('lastKey').textContent='---';
+
+ updateHistory();
+ updateDashboard();
+
+}
+
+/* RESULTS */
+
+function showResults(){
+
+ const total=totalKeys();
+ const count=tested.size;
+ const percent=Math.round(count/total*100);
+
+ document.getElementById('finalScore').textContent=percent;
+ document.getElementById('finalKeys').textContent=count;
+ document.getElementById('finalPresses').textContent=pressCount;
+ document.getElementById('finalLayout').textContent=currentLayout;
+ document.getElementById('finalPercent').textContent=percent+'%';
+
+ let message='Has probado '+count+' de '+total+' teclas visibles.';
+
+ if(percent===100){
+  message='¡PERFECT SCORE! Has probado todas las teclas del teclado virtual.';
+ }else if(percent>=70){
+  message='¡Buen trabajo! Has probado la mayor parte de tu teclado.';
+ }else if(percent>=30){
+  message='Buen comienzo. Todavía quedan teclas por probar.';
+ }else{
+  message='Sigue probando teclas para completar tu test.';
+ }
+
+ document.getElementById('resultMessage').textContent=message;
+
+ showScreen('results');
+
+}
+
+/* HOME */
+
+function backHome(){
+ pressed.clear();
+ showScreen('home');
+}
+
+</script>
+
+</body>
+</html>
